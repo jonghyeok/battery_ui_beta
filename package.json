@@ -1,0 +1,25 @@
+{
+  "name": "battery_ui_beta",
+  "version": "0.0.1",
+  "description": "battery info float ui for windows 10 app.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonghyeok/battery_ui_beta.git"
+  },
+  "keywords": [],
+  "author": "Jonghyeok_snail",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jonghyeok/battery_ui_beta/issues"
+  },
+  "homepage": "https://github.com/jonghyeok/battery_ui_beta#readme",
+  "dependencies": {
+    "gui": "^0.6.3",
+    "node-notifier": "^5.4.0",
+    "systeminformation": "^4.0.15"
+  }
+}
