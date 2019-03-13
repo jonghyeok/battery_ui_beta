@@ -4,7 +4,8 @@
   "description": "battery info float ui for windows 10 app.",
   "main": "app.js",
   "scripts": {
-    "start": "node ."
+    "postinstall": "yackage install",
+    "start": "yackage start"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,11 @@
   "dependencies": {
     "gui": "^0.6.3",
     "node-notifier": "^5.4.0",
-    "systeminformation": "^4.0.15"
+    "systeminformation": "^4.0.15",
+    "yackage": "^0.2.10"
+  },
+  "engines": {
+    "node": "10.14.2",
+    "yode": "0.4.2"
   }
 }
