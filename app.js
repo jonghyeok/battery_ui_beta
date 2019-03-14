@@ -3,15 +3,19 @@ const path = require('path');
 const si = require('systeminformation');
 const notifier = require('node-notifier');
 
+
 let p = null;
 let battery_info = {hasbattery: false};
 
+
+//Setting...
+let initTime = 1000;
+let timeOutTime = 60000;
+let globalTimeout = initTime;
+
 const win = gui.Window.create({frame: false, transparent: true})
-// win.setAlwaysOnTop(true)
-win.setContentSize({width: 200, height: 100})
+win.setContentSize({width: 100, height: 25})
 win.onClose = () => gui.MessageLoop.quit()
-
-
 
 const contentview = gui.Container.create()
 contentview.setMouseDownCanMoveWindow(true)
@@ -32,19 +36,19 @@ const menu = gui.MenuBar.create([
 
 async function updateBatteryInfo(){
   battery_info = si.battery();
-  setTimeout( () => updateBatteryInfo(), 3000);
+  setTimeout( () => updateBatteryInfo(), globalTimeout);
 }
 
 
 function drawWalls(painter){
   painter.beginPath();
-  painter.rect({x: 5, y: 5, width: 180, height: 90});   
+  painter.rect({x: 2.5, y: 1.25, width: 90, height: 22.5});   
   painter.lineWidth = 10;
   painter.setColor('#000000');
   painter.stroke();
 
   painter.beginPath();
-  painter.rect({x: 190, y: 40, width: 10, height: 20});   
+  painter.rect({x: 95, y: 7.5, width: 5, height: 10});   
   painter.setFillColor('#000000');
   painter.fill();
   painter.stroke();
@@ -62,19 +66,17 @@ function drawCharge(painter, charge){
     rgb_color_key_2 = "0"+rgb_color_key_2;
   }
 
-  console.log('#'+rgb_color_key_1+rgb_color_key_2+"00")
-
   drawClear(p);
   p.beginPath();
-  p.rect({x: 10, y: 10, width: (170 * (charge/100)), height: 80});
+  p.rect({x: 5, y: 2.5, width: (85 * (charge/100)), height: 20});
   painter.setFillColor('#'+rgb_color_key_1+rgb_color_key_2+"00");
-  //p.fillStyle = 'rgb('+ Math.floor((1-(charge/100))*255) + ',' + Math.floor((charge/100)*255) + ',0)';
   p.fill();
 }
 
 function drawClear(painter){
   p.beginPath();
-  p.rect({x: 10, y: 10, width: 170, height: 80});
+  p.rect({x: 5, y: 2.5, width: 85, height: 20});
+  painter.setFillColor('#FFFFFF');
   p.fill();
 }
 
@@ -93,14 +95,14 @@ function updateCharge(painter){
     charge = 100;
   }
   drawUpdate(painter, charge);
-  
-
 }
 
 function repaint(){
   contentview.schedulePaint()
-  console.log("re!");
-  setTimeout(() => repaint(), 2000);
+  setTimeout(() => repaint(), globalTimeout);
+  if(globalTimeout == initTime){
+     globalTimeout = timeOutTime;
+  }
 };
 
 repaint()
@@ -110,11 +112,8 @@ function initLoad(painter){
 }
 
 
-
 contentview.onDraw = (self, painter) => {
   p = painter;
-  //setTimeout(() => repaint(), 2000);
-  //self.schedulePaint();
   initLoad(p);
 }
 
