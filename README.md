@@ -13,6 +13,7 @@ npm i
 ```
 ### Run the project!
 You can use run this project.`npm start` or `yackage start`
+#### If you don't have battery, It will 100% Green color.
 
 ### Stop the project!
 You can use `Ctrl + Q` for stop the project.
