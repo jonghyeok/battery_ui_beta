@@ -5,7 +5,7 @@ const notifier = require('node-notifier');
 
 
 let p = null;
-let battery_info = {hasbattery: false};
+let battery_info = {hasbattery: false, percent: 50};
 
 
 //Setting...
@@ -35,8 +35,8 @@ const menu = gui.MenuBar.create([
 ])
 
 async function updateBatteryInfo(){
-  battery_info = si.battery();
-  setTimeout( () => updateBatteryInfo(), globalTimeout);
+  battery_info = await si.battery();
+  await setTimeout( () => updateBatteryInfo(), globalTimeout);
 }
 
 
@@ -86,13 +86,11 @@ function drawUpdate(painter, charge){
 }
 
 function updateCharge(painter){
-
-  const data = battery_info;
   let charge = 0;
-  if(data.hasbattery){
-    charge = data.percent;
+  if(battery_info.hasbattery){
+    charge = battery_info.percent;
   }else{
-    charge = 100;
+    charge = 50;
   }
   drawUpdate(painter, charge);
 }
