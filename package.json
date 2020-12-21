@@ -20,7 +20,7 @@
   "homepage": "https://github.com/jonghyeok/battery_ui_beta#readme",
   "dependencies": {
     "gui": "^0.6.3",
-    "node-notifier": "^5.4.0",
+    "node-notifier": "^8.0.1",
     "systeminformation": "^4.0.15",
     "yackage": "^0.2.10"
   },
